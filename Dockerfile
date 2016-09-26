@@ -1,4 +1,4 @@
-FROM dockerfile/nodejs
+FROM library/ ghost
 MAINTAINER gaoal <keepob@163.com>
 
 ADD run.sh /run.sh
@@ -16,11 +16,6 @@ RUN apt-get update && \
 ENV ROOT_PASS=123456 \
     GHOST_V=0.7.4-zh-full \
     GHOST_URL=my-ghost-blog.com \
-    MYSQL_HOST= \
-    MYSQL_PORT= \
-    MYSQL_USER= \
-    MYSQL_PASS= \
-    MYSQL_DB=
     NODE_ENV=production
     
 VOLUME  ["/data"]
