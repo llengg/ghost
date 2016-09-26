@@ -1,7 +1,6 @@
-FROM debian:wheezy
+FROM dockerfile/nodejs
 MAINTAINER gaoal <keepob@163.com>
 
-ADD sources.list  /etc/apt/sources.list
 ADD run.sh /run.sh
 
 # Install packages
@@ -10,16 +9,8 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/* && \
     mkdir -p /data && \
     chmod 755 /run.sh && \
-#   Install nodejs 0.10
-    cd /data && \
-    curl -O http://mirrors.163.com/debian/pool/main/r/rlwrap/rlwrap_0.37-3_amd64.deb > /dev/null 2>&1 && \
-    curl -O https://deb.nodesource.com/node_0.10/pool/main/n/nodejs/nodejs_0.10.40-1nodesource1~wheezy1_amd64.deb > /dev/null 2>&1 && \
-    dpkg -i *.deb && rm -rf *.deb && \
-    npm install forever -g && \
     cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime 
     
-
-ADD config.js /var/config.js
 
 # Exposed ENV
 ENV ROOT_PASS=123456 \
@@ -30,7 +21,8 @@ ENV ROOT_PASS=123456 \
     MYSQL_USER= \
     MYSQL_PASS= \
     MYSQL_DB=
-
+    NODE_ENV=production
+    
 VOLUME  ["/data"]
 
 EXPOSE  80
