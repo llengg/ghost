@@ -14,5 +14,5 @@ VOLUME  ["/data"]
 WORKDIR /data/ghost/
 
 EXPOSE  80
-CMD ["npm start"]
+CMD ["bash", "npm start"]
   
