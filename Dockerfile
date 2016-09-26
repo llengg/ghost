@@ -23,7 +23,7 @@ ADD config.js /var/config.js
 
 # Exposed ENV
 ENV ROOT_PASS=123456 \
-    GHOST_V=0.7.0-zh-full \
+    GHOST_V=0.7.4-zh-full \
     GHOST_URL=my-ghost-blog.com \
     MYSQL_HOST= \
     MYSQL_PORT= \
