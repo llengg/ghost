@@ -1,4 +1,4 @@
-FROM library/ ghost
+FROM library/ghost
 MAINTAINER gaoal <keepob@163.com>
 
 ADD run.sh /run.sh
