@@ -4,7 +4,6 @@ MAINTAINER gaoal <keepob@163.com>
 # Install packages
 RUN rm -rf /var/lib/apt/lists/* && \
     npm config set registry http://registry.cnpmjs.org && \
-    sed -i "s/localhost/$GHOST_URL/g" /etc/nginx/conf.d/ghost.conf && \
     cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime 
     
 # Exposed ENV
