@@ -14,5 +14,5 @@ ENV NODE_ENV=production
 VOLUME  ["/data"]
 
 EXPOSE  80
-CMD ["run.sh"]
+CMD ["/run.sh"]
   
