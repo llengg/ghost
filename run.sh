@@ -3,6 +3,6 @@
 npm config set registry http://registry.cnpmjs.org
 
 cd /data/ghost/
-npm start
+npm start --production
 
 
