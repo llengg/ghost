@@ -1,8 +1,10 @@
 FROM library/ghost
 MAINTAINER gaoal <keepob@163.com>
 
+ADD run.sh /run.sh
 # Install packages
 RUN rm -rf /var/lib/apt/lists/* && \
+    chmod 755 /run.sh && \
     npm config set registry http://registry.cnpmjs.org && \
     cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime 
     
@@ -11,8 +13,6 @@ ENV NODE_ENV=production
     
 VOLUME  ["/data"]
 
-WORKDIR /data/ghost/
-
 EXPOSE  80
-CMD ["bash", "npm start"]
+CMD ["run.sh"]
   
