@@ -3,10 +3,10 @@ FROM debian:wheezy
 
 # Install Ghost
 RUN apt-get update && \
-    apt-get -y install wget unzip mysql-client && \
+    apt-get -y install wget curl unzip mysql-client && \
     cd /tmp && \
-    wget http://mirrors.163.com/debian/pool/main/r/rlwrap/rlwrap_0.37-3_amd64.deb > /dev/null 2>&1 && \
-    wget https://deb.nodesource.com/node_0.10/pool/main/n/nodejs/nodejs_0.10.40-1nodesource1~wheezy1_amd64.deb > /dev/null 2>&1 && \
+    curl -O http://mirrors.163.com/debian/pool/main/r/rlwrap/rlwrap_0.37-3_amd64.deb > /dev/null 2>&1 && \
+    curl -0 https://deb.nodesource.com/node_0.10/pool/main/n/nodejs/nodejs_0.10.40-1nodesource1~wheezy1_amd64.deb > /dev/null 2>&1 && \
     dpkg -i *.deb && rm -rf *.deb && \
     wget http://dl.ghostchina.com/Ghost-0.7.4-zh-full.zip && \
     unzip Ghost-0.7.4-zh-full.zip -d /ghost && \
