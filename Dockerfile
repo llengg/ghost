@@ -12,7 +12,6 @@ RUN apt-get update && \
     unzip Ghost-0.7.4-zh-full.zip -d /ghost && \
     rm -f Ghost-0.7.4-zh-full.zip && \
     cd /ghost && \
-    npm config set registry http://registry.cnpmjs.org && \
     npm install mysql && \
     npm install --production && \
     useradd ghost --home /ghost && \
