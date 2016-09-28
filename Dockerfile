@@ -19,7 +19,7 @@ RUN apt-get update && \
     cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
 # Add files.
-ADD start.bash /ghost-start
+ADD run.sh /ghost-start
 ADD config.js /config.js
 
 # Set environment variables.
