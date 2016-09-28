@@ -18,14 +18,13 @@ RUN apt-get update && \
 	npm config set registry http://registry.cnpmjs.org && \
 	npm install mysql && \
 	npm install --production && \
-	sed 's/127.0.0.1/0.0.0.0/' /ghost/config.example.js > /ghost/config.js && \
-	sed 's/2236/80/' /ghost/config.example.js > /ghost/config.js && \
 	useradd ghost --home /ghost && \
 	rm -rf /var/lib/apt/lists/* && \
 	cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
 # Add files.
 ADD start.bash /ghost-start
+ADD config.js /config.js
 
 # Set environment variables.
 ENV NODE_ENV production
