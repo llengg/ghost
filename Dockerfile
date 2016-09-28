@@ -1,20 +1,43 @@
-FROM debian:wheezy
-MAINTAINER gaoal <keepob@163.com>
+#
+# Ghost Dockerfile
+#
+# https://github.com/dockerfile/ghost
+#
 
-ADD run.sh /run.sh
+# Pull base image.
+FROM dockerfile/nodejs
 
+# Install Ghost
 RUN apt-get update && \
-    apt-get -y install curl && \
-    chmod 755 /run.sh && \
-    curl -O http://mirrors.163.com/debian/pool/main/r/rlwrap/rlwrap_0.37-3_amd64.deb > /dev/null 2>&1 && \
-    curl -O https://deb.nodesource.com/node_0.10/pool/main/n/nodejs/nodejs_0.10.40-1nodesource1~wheezy1_amd64.deb > /dev/null 2>&1 && \
-    dpkg -i *.deb && \
-    rm -rf /var/lib/apt/lists/* && \
-    cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime 
-        
-VOLUME  ["/data"]
+	apt-get -y install mysql-client && \
+	cd /tmp && \
+	wget http://dl.ghostchina.com/Ghost-0.7.4-zh-full.zip && \
+	unzip Ghost-0.7.4-zh-full.zip -d /ghost && \
+	rm -f Ghost-0.7.4-zh-full.zip && \
+	cd /ghost && \
+	npm config set registry http://registry.cnpmjs.org && \
+	npm install mysql && \
+	npm install --production && \
+	sed 's/127.0.0.1/0.0.0.0/' /ghost/config.example.js > /ghost/config.js && \
+	sed 's/2236/80/' /ghost/config.example.js > /ghost/config.js && \
+	useradd ghost --home /ghost && \
+	rm -rf /var/lib/apt/lists/* && \
+	cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
-EXPOSE  80
+# Add files.
+ADD start.bash /ghost-start
 
-CMD ["/run.sh"]
-  
+# Set environment variables.
+ENV NODE_ENV production
+
+# Define mountable directories.
+VOLUME ["/data", "/ghost-override"]
+
+# Define working directory.
+WORKDIR /ghost
+
+# Define default command.
+CMD ["bash", "/ghost-start"]
+
+# Expose ports.
+EXPOSE 80
